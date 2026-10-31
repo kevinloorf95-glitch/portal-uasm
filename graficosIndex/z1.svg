@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1593.64 1838.79" width="1593.64" height="1838.79">
+  <title>PRISMA 2020 flow - English</title>
+  <desc>Translated English copy of prisma.svg (bibliometric pipeline + PRISMA 2020 selection + Delphi validation)</desc>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <defs>
+    <style type="text/css"><![CDATA[
+      .box { fill: #ffffff; stroke: #000000; stroke-width: 1.2; }
+      .line { fill: none; stroke: #000000; stroke-width: 1.6; }
+      .t {
+        font-family: Arial, Helvetica, sans-serif;
+        fill: #000000;
+        text-anchor: middle;
+      }
+      .t-sm { font-size: 15px; }
+      .t-md { font-size: 17px; }
+      .t-lg { font-size: 18px; }
+      .t-xl { font-size: 20px; }
+      .t-left { text-anchor: start; }
+    ]]></style>
+  </defs>
+
+  <!-- ========== TOP PIPELINE ========== -->
+  <!-- Start circle -->
+  <circle class="box" cx="117" cy="170" r="100"/>
+  <text class="t t-md" x="117" y="155">
+    <tspan x="117" dy="0">Bibliometric</tspan>
+    <tspan x="117" dy="20">analysis</tspan>
+    <tspan x="117" dy="20">pipeline</tspan>
+  </text>
+
+  <line class="line" x1="217" y1="170" x2="248" y2="170"/>
+
+  <!-- Key terms -->
+  <rect class="box" x="248.7" y="144.7" width="106.3" height="50.4"/>
+  <text class="t t-sm" x="301.85" y="175">Key terms</text>
+
+  <line class="line" x1="355" y1="170" x2="372" y2="170"/>
+
+  <!-- Search terms -->
+  <rect class="box" x="372.1" y="91.5" width="244.9" height="154.7"/>
+  <text class="t t-sm t-left" x="390" y="135">
+    <tspan x="390" dy="0">- Underground mining</tspan>
+    <tspan x="390" dy="28">- Mining technology</tspan>
+    <tspan x="390" dy="28">- Artisanal and</tspan>
+    <tspan x="390" dy="18">  small-scale mining</tspan>
+  </text>
+
+  <line class="line" x1="617" y1="170" x2="632" y2="170"/>
+
+  <!-- 360 diamond -->
+  <polygon class="box" points="770,47 907,170 770,293 633,170"/>
+  <text class="t t-md" x="770" y="158">
+    <tspan x="770" dy="0">360 documents</tspan>
+    <tspan x="770" dy="22">in Scopus</tspan>
+  </text>
+
+  <line class="line" x1="907" y1="170" x2="977" y2="170"/>
+
+  <!-- pybliometrics -->
+  <rect class="box" x="977" y="91.4" width="299.5" height="154.7"/>
+  <text class="t t-sm t-left" x="995" y="130">
+    <tspan x="995" dy="0" font-weight="bold">pybliometrics:</tspan>
+    <tspan x="995" dy="32">- Validation via Scopus API</tspan>
+    <tspan x="995" dy="28">- Data cleaning and</tspan>
+    <tspan x="995" dy="20">  imputation</tspan>
+  </text>
+
+  <line class="line" x1="1276.5" y1="170" x2="1301" y2="170"/>
+
+  <!-- Inclusion / exclusion -->
+  <rect class="box" x="1301" y="94.1" width="269.4" height="149.3"/>
+  <text class="t t-sm" x="1435.7" y="125">
+    <tspan x="1435.7" dy="0">All languages, subject</tspan>
+    <tspan x="1435.7" dy="18">areas, and document</tspan>
+    <tspan x="1435.7" dy="18">types were included;</tspan>
+    <tspan x="1435.7" dy="18">91 incomplete documents</tspan>
+    <tspan x="1435.7" dy="18">without a DOI were</tspan>
+    <tspan x="1435.7" dy="18">excluded</tspan>
+  </text>
+
+  <!-- Connector down from exclusion box to visualization -->
+  <line class="line" x1="1435" y1="243.4" x2="1435" y2="300"/>
+  <line class="line" x1="826" y1="300" x2="1435" y2="300"/>
+  <line class="line" x1="826" y1="300" x2="826" y2="339"/>
+
+  <!-- Visualization -->
+  <rect class="box" x="617" y="339.4" width="417.7" height="133.9"/>
+  <text class="t t-sm" x="825.85" y="365">
+    <tspan x="825.85" dy="0">Data visualization in pybliometrics</tspan>
+    <tspan x="825.85" dy="18">and VOSviewer:</tspan>
+    <tspan x="825.85" dy="22">Annual production by period.</tspan>
+    <tspan x="825.85" dy="18">Production by country affiliation.</tspan>
+    <tspan x="825.85" dy="18">Author-keyword co-occurrence.</tspan>
+  </text>
+
+  <line class="line" x1="1034.7" y1="406" x2="1100.5" y2="406"/>
+
+  <!-- Bibliometric mapping -->
+  <rect class="box" x="1100.5" y="348.9" width="205.3" height="106.1"/>
+  <text class="t t-md" x="1203.15" y="395">
+    <tspan x="1203.15" dy="0">Bibliometric</tspan>
+    <tspan x="1203.15" dy="22">mapping</tspan>
+  </text>
+
+  <line class="line" x1="1305.8" y1="402" x2="1352" y2="402"/>
+
+  <!-- 269 cylinder (top) -->
+  <g transform="translate(1352,366)">
+    <path class="box" d="M0,18 C0,8 34.5,0 77,0 C119.5,0 154,8 154,18 L154,90 C154,100 119.5,108 77,108 C34.5,108 0,100 0,90 Z"/>
+    <ellipse class="box" cx="77" cy="18" rx="77" ry="18"/>
+    <text class="t t-md" x="77" y="58">
+      <tspan x="77" dy="0">269</tspan>
+      <tspan x="77" dy="20">documents</tspan>
+    </text>
+  </g>
+
+  <!-- ========== PRISMA SECTION ========== -->
+  <!-- Protocol box -->
+  <rect class="box" x="185.1" y="551.4" width="247.1" height="132.7"/>
+  <text class="t t-xl" x="308.65" y="605">
+    <tspan x="308.65" dy="0">PRISMA 2020</tspan>
+    <tspan x="308.65" dy="28">protocol</tspan>
+  </text>
+
+  <line class="line" x1="432.2" y1="617.7" x2="566.8" y2="617.7"/>
+
+  <!-- Selection -->
+  <polygon class="box" points="680.7,525 794.6,617.7 680.7,710.4 566.8,617.7"/>
+  <text class="t t-lg" x="680.7" y="624">Selection</text>
+
+  <line class="line" x1="794.6" y1="617.7" x2="872.6" y2="617.7"/>
+
+  <g transform="translate(872.6,582.5)">
+    <path class="box" d="M0,18 C0,8 34.5,0 77,0 C119.5,0 154,8 154,18 L154,90 C154,100 119.5,108 77,108 C34.5,108 0,100 0,90 Z"/>
+    <ellipse class="box" cx="77" cy="18" rx="77" ry="18"/>
+    <text class="t t-md" x="77" y="58">
+      <tspan x="77" dy="0">269</tspan>
+      <tspan x="77" dy="20">documents</tspan>
+    </text>
+  </g>
+
+  <line class="line" x1="680.7" y1="710.4" x2="680.7" y2="740.8"/>
+
+  <!-- Screening -->
+  <polygon class="box" points="680.6,740.8 796.6,833.5 680.6,926.1 564.5,833.5"/>
+  <text class="t t-lg" x="680.6" y="840">Screening</text>
+
+  <line class="line" x1="796.6" y1="833.5" x2="872.6" y2="833.5"/>
+
+  <g transform="translate(872.6,797.5)">
+    <path class="box" d="M0,18 C0,8 34.5,0 77,0 C119.5,0 154,8 154,18 L154,90 C154,100 119.5,108 77,108 C34.5,108 0,100 0,90 Z"/>
+    <ellipse class="box" cx="77" cy="18" rx="77" ry="18"/>
+    <text class="t t-md" x="77" y="58">
+      <tspan x="77" dy="0">258</tspan>
+      <tspan x="77" dy="20">documents</tspan>
+    </text>
+  </g>
+
+  <line class="line" x1="1026.6" y1="833.5" x2="1102.3" y2="833.5"/>
+  <rect class="box" x="1102.3" y="785.5" width="347.8" height="94.2"/>
+  <text class="t t-md" x="1276.2" y="825">
+    <tspan x="1276.2" dy="0">Documents published</tspan>
+    <tspan x="1276.2" dy="22">between 2006 and 2026</tspan>
+  </text>
+
+  <line class="line" x1="680.6" y1="926.1" x2="680.6" y2="957.5"/>
+
+  <!-- Eligibility -->
+  <polygon class="box" points="680.6,957.5 796.6,1050.4 680.6,1143.2 564.5,1050.4"/>
+  <text class="t t-lg" x="680.6" y="1057">Eligibility</text>
+
+  <line class="line" x1="796.6" y1="1050.4" x2="863.4" y2="1050.4"/>
+
+  <g transform="translate(863.4,1015.2)">
+    <path class="box" d="M0,18 C0,8 34.5,0 77,0 C119.5,0 154,8 154,18 L154,90 C154,100 119.5,108 77,108 C34.5,108 0,100 0,90 Z"/>
+    <ellipse class="box" cx="77" cy="18" rx="77" ry="18"/>
+    <text class="t t-md" x="77" y="58">
+      <tspan x="77" dy="0">207</tspan>
+      <tspan x="77" dy="20">documents</tspan>
+    </text>
+  </g>
+
+  <line class="line" x1="1017.4" y1="1050.4" x2="1095.5" y2="1050.4"/>
+  <rect class="box" x="1095.5" y="1003.3" width="347.8" height="94.2"/>
+  <text class="t t-sm" x="1269.4" y="1038">
+    <tspan x="1269.4" dy="0">Documents in the underground</tspan>
+    <tspan x="1269.4" dy="20">mining / mining technology</tspan>
+    <tspan x="1269.4" dy="20">cluster</tspan>
+  </text>
+
+  <line class="line" x1="680.6" y1="1143.2" x2="680.6" y2="1170.2"/>
+
+  <!-- Included -->
+  <polygon class="box" points="680.6,1170.2 796.6,1262.8 680.6,1355.5 564.5,1262.8"/>
+  <text class="t t-lg" x="680.6" y="1269">Included</text>
+
+  <line class="line" x1="796.6" y1="1262.8" x2="863.4" y2="1262.8"/>
+
+  <g transform="translate(863.4,1227.7)">
+    <path class="box" d="M0,18 C0,8 34.5,0 77,0 C119.5,0 154,8 154,18 L154,90 C154,100 119.5,108 77,108 C34.5,108 0,100 0,90 Z"/>
+    <ellipse class="box" cx="77" cy="18" rx="77" ry="18"/>
+    <text class="t t-md" x="77" y="58">
+      <tspan x="77" dy="0">124</tspan>
+      <tspan x="77" dy="20">documents</tspan>
+    </text>
+  </g>
+
+  <line class="line" x1="1017.4" y1="1262.8" x2="1095.5" y2="1262.8"/>
+  <rect class="box" x="1095.5" y="1215.7" width="358.6" height="94.2"/>
+  <text class="t t-md" x="1274.8" y="1255">
+    <tspan x="1274.8" dy="0">Full-text documents available,</tspan>
+    <tspan x="1274.8" dy="22">2008-2026</tspan>
+  </text>
+
+  <!-- Connector to matrix -->
+  <line class="line" x1="680.6" y1="1355.5" x2="680.6" y2="1457.8"/>
+
+  <!-- Technology integration matrix (ellipse) -->
+  <ellipse class="box" cx="680.6" cy="1535" rx="150" ry="77"/>
+  <text class="t t-md" x="680.6" y="1523">
+    <tspan x="680.6" dy="0">Technology</tspan>
+    <tspan x="680.6" dy="22">integration matrix</tspan>
+  </text>
+
+  <line class="line" x1="680.6" y1="1612" x2="680.6" y2="1647.7"/>
+
+  <!-- Delphi validation -->
+  <rect class="box" x="545.9" y="1647.7" width="269.4" height="149.3"/>
+  <text class="t t-md" x="680.6" y="1695">
+    <tspan x="680.6" dy="0">Operational expert</tspan>
+    <tspan x="680.6" dy="22">validation</tspan>
+    <tspan x="680.6" dy="22">(Delphi method)</tspan>
+  </text>
+
+  <line class="line" x1="815.3" y1="1722" x2="863.4" y2="1722"/>
+
+  <!-- Round 1 -->
+  <rect class="box" x="863.4" y="1654" width="247.1" height="132.7"/>
+  <text class="t t-sm" x="986.95" y="1695">
+    <tspan x="986.95" dy="0">Round 1: Determine</tspan>
+    <tspan x="986.95" dy="20">technology integration</tspan>
+    <tspan x="986.95" dy="20">criteria</tspan>
+  </text>
+
+  <line class="line" x1="1110.5" y1="1720" x2="1158.5" y2="1720"/>
+
+  <!-- Round 2 -->
+  <rect class="box" x="1158.5" y="1654" width="274.5" height="132.7"/>
+  <text class="t t-sm" x="1295.75" y="1690">
+    <tspan x="1295.75" dy="0">Round 2: Integration</tspan>
+    <tspan x="1295.75" dy="18">improvements according</tspan>
+    <tspan x="1295.75" dy="18">to factor priority</tspan>
+  </text>
+</svg>

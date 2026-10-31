@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="Portal de Transferencia Tecnológica y Observatorio Operativo · UASM">Portal de Transferencia Tecnológica y Observatorio Operativo · UASM</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="kicker" data-i18n="Revisión sistemática de literatura · Scopus · 1974–2026">Revisión sistemática de literatura · Scopus · 1974–2026</div>
+    <h1 data-i18n="Portal de <span class=\"accent\">Transferencia Tecnológica</span> y Observatorio Operativo de la Minería Subterránea Artesanal y de Pequeña Escala (UASM)">Portal de <span class="accent">Transferencia Tecnológica</span> y Observatorio Operativo de la Minería Subterránea Artesanal y de Pequeña Escala (UASM)</h1>
+    <p class="sub" data-i18n="Catálogo operativo de tecnologías mineras por madurez (TRL), geometría del yacimiento, viabilidad económica (CAPEX/OPEX) e impacto en seguridad y ambiente, integrado con cinco vistas del corpus Scopus: 124 (final cualitativo), 360 (exportación original), 269 (depurado), 258 (rango 2006–2026) y 207 (clúster «Mina subterránea × tecnología minera»), validado por un panel de expertos Delphi.">Catálogo operativo de tecnologías mineras por madurez (TRL), geometría del yacimiento, viabilidad económica (CAPEX/OPEX) e impacto en seguridad y ambiente, integrado con cinco vistas del corpus Scopus: 124 (final cualitativo), 360 (exportación original), 269 (depurado), 258 (rango 2006–2026) y 207 (clúster «Mina subterránea × tecnología minera»), validado por un panel de expertos Delphi.</p>
+    <div id="kpis" class="kpis"></div>
+    <div class="hero-cta">
+      <button class="btn" data-nav="observatorio" data-i18n-btn="Explorar Observatorio">Explorar Observatorio</button>
+      <button class="btn btn-sec" data-nav="matriz" data-i18n-btn="Ver Matriz de Tecnologías">Ver Matriz de Tecnologías</button>
+      <button class="btn btn-ghost" data-nav="corpus" data-i18n-btn="Explorar Corpus">Explorar Corpus</button>
+      <button class="btn btn-ghost" data-nav="datos" data-i18n-btn="Cargar bases .db">Cargar bases .db</button>
+    </div>
+    <div id="db_status" class="db-status" data-i18n="Cargando bases… · si no aparecen, seleccione los archivos">Cargando bases… · si no aparecen, seleccione los archivos <code>.db</code> de la carpeta <code>db/</code></div>
+    <div class="lang-toggle">
+      <button id="lang_es" class="lang-btn active" data-lang="es">Español</button>
+      <button id="lang_en" class="lang-btn" data-lang="en">English</button>
+    </div>
+  </div>
+</header>
+
+<nav class="nav" id="nav">
+  <ul>
+    <li><a data-nav="datos" href="#datos" data-i18n="Datos">Datos</a></li>
+    <li><a data-nav="inicio" href="#inicio" data-i18n="Inicio">Inicio</a></li>
+    <li><a data-nav="metodologia" href="#metodologia" data-i18n="Metodología">Metodología</a></li>
+    <li><a data-nav="observatorio" href="#observatorio" data-i18n="Observatorio">Observatorio</a></li>
+    <li><a data-nav="matriz" href="#matriz" data-i18n="Matriz de Tecnologías">Matriz de Tecnologías</a></li>
+    <li><a data-nav="red" href="#red" data-i18n="Red de Convergencia">Red de Convergencia</a></li>
+    <li><a data-nav="corpus" href="#corpus" data-i18n="Corpus">Corpus</a></li>
+    <li><a data-nav="bases" href="#bases" data-i18n="Bases .db">Bases .db</a></li>
+    <li class="nav-toggle"><button id="theme_toggle" class="theme-toggle" type="button" data-i18n="Modo noche">Modo noche</button></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- DATOS -->
+  <section id="datos" class="panel">
+    <h2 data-i18n="Carga de datos · portabilidad sin servidor">Carga de datos · portabilidad sin servidor</h2>
+    <p data-i18n="Este portal funciona <strong>íntegramente en el navegador</strong>: no necesita servidor ni conexión a internet. Toda la información se lee de los archivos">Este portal funciona <strong>íntegramente en el navegador</strong>: no necesita servidor ni conexión a internet. Toda la información se lee de los archivos <code>.db</code> (SQLite) que acompañan al manuscrito. Cargue los archivos de la carpeta <code>db/</code> con el selector o arrástrelos aquí; la página detectará cada base, repintará todas las gráficas con Plotly y habilitará las descargas. No se envía ningún dato a ningún servidor.</p>
+    <div class="card">
+      <div class="card-head">
+        <h3 data-i18n="Cargar bases <code>.db</code>">Cargar bases <code>.db</code></h3>
+        <button class="btn btn-sm btn-sec" id="btn_cargar_todo" data-i18n-btn="Cargar todas">Cargar todas</button>
+      </div>
+      <div id="drop_zone" class="drop-zone">
+        <p class="drop-hint" data-i18n="Arrastre aquí los archivos">Arrastre aquí los archivos <code>.db</code> o</p>
+        <input type="file" id="file_input" accept=".db" multiple hidden>
+        <button class="btn" id="btn_elegir" data-i18n-btn="Seleccionar archivos .db">Seleccionar archivos .db</button>
+        <p class="card-note" id="load_msg">Ninguna base cargada todavía.</p>
+      </div>
+      <div class="table-wrap" style="margin-top:.9rem">
+        <table class="tbl" id="tabla_cargadas">
+          <thead><tr><th data-i18n="database">Base</th><th data-i18n="type">Tipo</th><th class="num" data-i18n="rows">Filas</th><th data-i18n="status">Estado</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- INICIO -->
+  <section id="inicio" class="panel">
+    <h2 data-i18n="Resumen del portal">Resumen del portal</h2>
+    <p data-i18n="Este portal conecta el corpus final de la revisión sistemática">Este portal conecta el <strong>corpus final de la revisión sistemática</strong> (124 documentos Scopus, 2008–2026, entregado en <code>thirdPass_124.csv</code>) con una <strong>matriz operativa de tecnologías</strong> para la minería artesanal y de pequeña escala. Cada tecnología se cataloga por nivel de madurez tecnológica (TRL 1–9), compatibilidad con la geometría del yacimiento (incluidas vetas angostas de 2–3 m), requerimientos de inversión (CAPEX/OPEX) e impacto en seguridad y ambiente, con valores calibrados por un panel de expertos Delphi con 10–20 años de experiencia.</p>
+    <div id="cards_inicio"></div>
+  </section>
+
+  <!-- METODOLOGÍA -->
+  <section id="metodologia" class="panel">
+    <h2 data-i18n="Metodología · flujo de la revisión sistemática (PRISMA 2020)">Metodología · flujo de la revisión sistemática (PRISMA 2020)</h2>
+    <p data-i18n="El corpus se construyó siguiendo la guía <strong>PRISMA 2020</strong> y se procesó en tres fases.">El corpus se construyó siguiendo la guía <strong>PRISMA 2020</strong> y se procesó en tres fases. La fase I depura la exportación de Scopus; la fase II aplica análisis bibliométrico (bibliometrix, VOSviewer); la fase III valida los resultados con un panel Delphi.</p>
+    <div class="card">
+      <div class="card-head"><h3 data-i18n="Figura 1 · diagrama de flujo PRISMA 2020">Figura 1 · diagrama de flujo PRISMA 2020</h3></div>
+      <img class="figura" src="graficosIndex/z1.svg" alt="Diagrama de flujo PRISMA 2020 del proceso de identificación, cribado e inclusión del corpus" loading="lazy">
+      <p class="card-note" data-i18n="Flujo de selección del corpus: identificación">Flujo de selección del corpus: identificación (exportación de Scopus, 360 documentos), cribado (validación de DOI y eliminación de duplicados, 269 con DOI; acotación al rango 2006–2026, 258; aislamiento del clúster «Mina subterránea × tecnología minera», 207) e inclusión (corpus cualitativo final, 124 documentos, 2008–2026) validado mediante panel Delphi.</p>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3 data-i18n="chart_periodos">Producción anual por periodos e impacto acumulado</h3></div>
+      <div id="metodo_periodos"></div>
+      <p class="card-note" data-i18n="chart_periodos_desc">Producción anual de documentos por período con impacto acumulado de citas.</p>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3 data-i18n="Figura 3 · 23 tecnologías identificadas según z6.svg">Figura 3 · 23 tecnologías identificadas según z6.svg</h3></div>
+      <img class="figura" src="graficosIndex/z6.svg" alt="23 tecnologías de integración identificadas en 5 etapas operativas" loading="lazy">
+      <p class="card-note" data-i18n="23 tecnologías de integración identificadas en 5 etapas operativas según el análisis del corpus">23 tecnologías de integración identificadas en 5 etapas operativas según el análisis del corpus.</p>
+    </div>
+  </section>
+
+  <!-- OBSERVATORIO -->
+  <section id="observatorio" class="panel">
+    <h2 data-i18n="Observatorio Operativo de la UASM">Observatorio Operativo de la UASM</h2>
+    <p data-i18n="Indicadores de adopción tecnológica, seguridad, cumplimiento ambiental, inversión y marco normativo por región y país (África, Latinoamérica, Asia-Pacífico y Europa). Los valores se calibraron con fuentes públicas (UNESCO, Banco Mundial, IGF) y se validaron con el panel de expertos (Delphi).">Indicadores de adopción tecnológica, seguridad, cumplimiento ambiental, inversión y marco normativo por región y país (África, Latinoamérica, Asia-Pacífico y Europa). Los valores se calibraron con fuentes públicas (UNESCO, Banco Mundial, IGF) y se validaron con el panel de expertos (Delphi).</p>
+    <div id="cards_observatorio"></div>
+    <div class="card" style="margin-top:1rem">
+      <div class="card-head">
+        <h3 data-i18n="Perfil regional multidimensional">Perfil regional multidimensional</h3>
+        <div style="display: flex; gap: .5rem; align-items: center;">
+          <button class="btn btn-sm" id="btn_cargar_perfil" data-i18n-btn="Cargar/Actualizar tabla">Cargar/Actualizar tabla</button>
+          <input type="file" id="file_perfil_regional" accept=".db" hidden>
+          <button class="btn-export" data-csv="tabla_perfil_regional">CSV</button>
+        </div>
+      </div>
+      <p class="card-note" data-i18n="Gráfica, tabla y carga de indicadores regionales multidimensionales.">Gráfica, tabla y carga de indicadores regionales multidimensionales. Cargue un archivo .db para actualizar la tabla.</p>
+      <div id="perfil_regional_grafica" style="min-height: 400px; margin-bottom: 1rem;"></div>
+      <div class="table-wrap"><div id="tabla_perfil_regional"></div></div>
+    </div>
+  </section>
+
+  <!-- MATRIZ -->
+  <section id="matriz" class="panel">
+    <h2 data-i18n="Matriz de Transferencia Tecnológica">Matriz de Transferencia Tecnológica</h2>
+    <p data-i18n="Catálogo de tecnologías identificadas en la literatura, ordenado por geometría del yacimiento y viabilidad económica. Los campos DOCS, TRL, CAPEX, OPEX, SEG, AMB han sido eliminados de la tabla. A continuación figuran las rondas Delphi:">Catálogo de tecnologías identificadas en la literatura, ordenado por geometría del yacimiento y viabilidad económica. Los campos DOCS, TRL, CAPEX, OPEX, SEG, AMB han sido eliminados de la tabla. A continuación figuran las rondas Delphi:</p>
+    <div id="cards_matriz"></div>
+  </section>
+
+  <!-- RED -->
+  <section id="red" class="panel">
+    <h2 data-i18n="Red de convergencia tecnológica">Red de convergencia tecnológica</h2>
+    <p data-i18n="Red de co-ocurrencia de tecnologías del catálogo">Red de co-ocurrencia de tecnologías del catálogo: un vínculo une dos tecnologías cuando comparten documentos del corpus (el grosor indica el número de co-ocurrencias). Solo se muestran tecnologías con valor mayor a 0.</p>
+    <div id="cards_red"></div>
+  </section>
+
+  <!-- CORPUS -->
+  <section id="corpus" class="panel">
+    <h2 data-i18n="Explorador del corpus">Explorador del corpus</h2>
+    <p data-i18n="Cinco vistas del corpus Scopus">Cinco vistas del corpus Scopus: <strong>124</strong> (corpus final cualitativo, <code>thirdPass_124.csv</code>), <strong>360</strong> (exportación original de Scopus, <code>scopusRevisionManual.csv</code>), <strong>269</strong> (corpus depurado), <strong>258</strong> (rango analítico 2006–2026) y <strong>207</strong> (clúster «Mina subterránea × tecnología minera» en 2006–2026). Seleccione una pestaña para explorar la vista correspondiente; el corpus <strong>124</strong> se materializa en <code>tabla_corpus.db</code> y el resto en <code>corpus_&lt;id&gt;.db</code>.</p>
+    <div class="corpus-tabs" id="corpus_tabs"></div>
+    <div class="filters">
+      <input type="search" id="f_cor_search" placeholder="Buscar en título, autores, fuente, palabras clave…" data-i18n-placeholder="Buscar en título, autores, fuente, palabras clave…">
+      <select id="f_cor_cluster"><option value="">Todos los clústeres</option></select>
+      <select id="f_cor_acceso"><option value="">Cualquier acceso</option></select>
+      <input type="number" id="f_cor_y0" placeholder="Año desde" min="1970" max="2030" data-i18n-placeholder="Año desde">
+      <input type="number" id="f_cor_y1" placeholder="Año hasta" min="1970" max="2030" data-i18n-placeholder="Año hasta">
+      <button class="btn btn-sm" id="btn_corpus_csv" data-i18n-btn="Exportar CSV">Exportar CSV</button>
+    </div>
+    <p class="card-note"><span id="corpus_count"></span> <span data-i18n="documentos">documentos</span> · fuente: <code id="corpus_fuente">tabla_corpus.db</code></p>
+    <div class="table-wrap">
+      <table class="tbl" id="tabla_corpus">
+        <thead>
+          <tr><th data-i18n="year">Año</th><th data-i18n="title">Título</th><th data-i18n="authors">Autores</th><th data-i18n="source">Fuente</th><th class="num" data-i18n="citations">Citas</th><th data-i18n="cluster">Clúster</th><th data-i18n="access">Acceso</th><th data-i18n="doi">DOI</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="pagination" id="corpus_paginacion"></div>
+
+    <div class="card" style="margin-top:1rem">
+      <div class="card-head">
+        <h3 data-i18n="Entrega científica · <code>tabla_deliverable.db</code>">Entrega científica · <code>tabla_deliverable.db</code> (n=124, 2008–2026)</h3>
+        <button class="btn-export" data-csv="tabla_deliverable" data-i18n-btn="Descargar CSV">Descargar CSV</button>
+      </div>
+      <p class="card-note" data-i18n="Análisis cualitativo completo por documento">Análisis cualitativo completo por documento: hallazgos principales, limitaciones y novedad. Descargue la tabla en CSV para la sección <em>Data availability</em> del manuscrito.</p>
+      <div class="table-wrap"><div id="tabla_deliverable"></div></div>
+    </div>
+  </section>
+
+  <!-- BASES .db -->
+  <section id="bases" class="panel">
+    <h2 data-i18n="Bases de datos <code>.db</code> · fuente única de verdad">Bases de datos <code>.db</code> · fuente única de verdad</h2>
+    <p data-i18n="Todo lo que muestra el portal proviene de los archivos <code>.db</code> (SQLite) cargados por el usuario. Cada gráfica y cada tabla tiene su propia base derivada con las tablas <code>datos</code> (filas mostradas), <code>base</code> (cálculo de origen), <code>columnas</code> (metadatos de campos) y <code>meta</code> (descripción y ficha).">Todo lo que muestra el portal proviene de los archivos <code>.db</code> (SQLite) cargados por el usuario. Cada gráfica y cada tabla tiene su propia base derivada con las tablas <code>datos</code> (filas mostradas), <code>base</code> (cálculo de origen), <code>columnas</code> (metadatos de campos) y <code>meta</code> (descripción y ficha).</p>
+    <div class="card">
+      <div class="card-head"><h3 data-i18n="Inventario de bases cargadas">Inventario de bases cargadas</h3></div>
+      <p class="card-note" id="db_dir">Cargue los <code>.db</code> para ver el inventario.</p>
+      <div class="table-wrap">
+        <table class="tbl" id="tabla_dbs">
+          <thead><tr><th data-i18n="database">Base</th><th data-i18n="type">Tipo</th><th class="num" data-i18n="rows">Filas</th><th data-i18n="tables">Tablas</th><th data-i18n="download">Descarga</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="db_esquema" class="schema-box mono"></div>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <div class="card-head"><h3 data-i18n="Consola SQL de solo lectura">Consola SQL de solo lectura</h3></div>
+      <div class="filters">
+        <select id="sql_db"></select>
+        <button class="btn btn-sm" id="sql_run">Ejecutar SELECT</button>
+        <span class="card-note" data-i18n="Solo se permiten consultas de lectura sobre las bases cargadas.">Solo se permiten consultas de lectura sobre las bases cargadas.</span>
+      </div>
+      <textarea id="sql_txt" rows="3" class="mono">SELECT anio, COUNT(*) AS n FROM datos GROUP BY anio ORDER BY anio DESC LIMIT 10</textarea>
+      <div class="table-wrap"><div id="sql_out" class="sql-out"></div></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span data-i18n-footer>Portal UASM · Observatorio Operativo y Transferencia Tecnológica · Corpus Scopus 1974–2026 (n=124 · <code>thirdPass_124.csv</code>)</span>
+</footer>
+
+<script src="assets/plotly.min.js"></script>
+<script src="assets/sql-wasm.js"></script>
+<script src="assets/sql-wasm-binary.js"></script>
+<script src="assets/portal.js"></script>
+<script src="assets/translation.js"></script>
+</body>
+</html>
