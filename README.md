@@ -1,7 +1,10 @@
-# Portal MAPE · aplicación web sobre bases `.db`
+# Portal UASM · Aplicación web sobre bases `.db`
 
-Portal de Transferencia Tecnológica y Observatorio Operativo de la Minería
-Artesanal y de Pequeña Escala (MAPE). Es una **aplicación web real**: todo el
+**🌐 Enlace en línea:** https://kevinloorf95-glitch.github.io/portal-uasm/
+
+Portal de Transferencia Tecnológica y Observatorio Operativo de la Minería Subterránea Artesanal y de Pequeña Escala (UASM). Es una **aplicación web completa** con todos los archivos `.db` ya cargados y listos para usar.
+
+> **✅ Los archivos .db están precargados:** 24 bases de datos SQLite (7 fuentes + 17 derivadas) ya están disponibles en la carpeta `db/`. Al abrir el portal, se cargarán automáticamente. Es una **aplicación web real**: todo el
 estado vive en bases SQLite (`.db`) y la interfaz es un cliente de la API REST
 del servidor. Si edita un `.db` con `sqlite3`, DBeaver o con el editor
 integrado, el portal recalcula los agregados y se repinta solo.
