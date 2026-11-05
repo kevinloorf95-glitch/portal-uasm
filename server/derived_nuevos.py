@@ -114,9 +114,9 @@ NUEVAS = [
          desc="Diagrama de flujo de 5 ejes (tecnología → barreras → viabilidad → "
               "impacto financiero → KPI → riesgo) para las 7 tecnologías evaluadas.",
          fuente="ronda2.csv",
-         cols=[C("tecnologia", "Tecnología"), C("barreras", "Barreras técnico-económicas"),
-               C("viabilidad", "Viabilidad"), C("impacto", "Impacto financiero"),
-               C("kpi", "KPI"), C("riesgo", "Riesgos"), C("color", "Color")]),
+         cols=[C("tecnologia", "Technology"), C("barreras", "Technical and economic barriers"),
+               C("viabilidad", "Feasibility status"), C("impacto", "Financial impact"),
+               C("kpi", "Main KPI"), C("riesgo", "Dominant risk"), C("color", "Color")]),
     dict(id="chart_ronda3", tipo="grafica", seccion="Matriz",
          titulo="Ronda 3 · Priorización multicriterio de tecnologías",
          desc="Mapa de calor 7 tecnologías × 7 criterios (promedio, VT, SSO, IP, SA, "
@@ -412,15 +412,68 @@ def datos_ronda1():
 
 
 # ============================================================ z7 · ronda 2
-R2_MAP = {
-    "sensor networks": ("Viable", "Mejor balance", "Gases y accidentes", "Resistencia al cambio"),
-    "teleoperation": ("Viable", "Favorable", "Avance y costo", "Latencia e inercia"),
-    "gas catalysts": ("Viable", "Buen balance", "Gases y accidentes", "Mantenimiento"),
-    "pre-concentration": ("Viable", "Mejor balance", "Dilución y energía", "Complejidad"),
-    "paste backfill": ("Alta prioridad", "Inversión inicial", "Estabilidad y relaves", "Mezclas"),
-    "thermal spalling": ("No viable", "Inversión alta", "Costo y energía", "Falta de escala"),
-    "hydrofracturing": ("No viable", "Inversión alta", "Costo y sobrefractura", "Inestabilidad"),
+COLORES_TECH_R2 = {
+    "T1": "#D55E00", "T2": "#E69F00", "T3": "#009E73", "T4": "#0072B2",
+    "T5": "#56B4E9", "T6": "#CC79A7", "T7": "#F0E442",
 }
+
+
+def _cat_viabilidad(texto):
+    t = (texto or "").lower()
+    if "unviable" in t or "low viability" in t:
+        return "Unviable / high risk"
+    if "rockfall" in t or "prevent rockfalls" in t:
+        return "High priority: stability"
+    if "viable" in t:
+        return "Viable"
+    return "High priority: stability"
+
+
+def _cat_financiero(texto):
+    t = (texto or "").lower()
+    if "unfavorable" in t:
+        return "High initial investment"
+    if "favorable" in t and "balance" in t:
+        return "Positive balance · reduces costs"
+    if "best" in t and "affordability" in t:
+        return "Investment required (stability)"
+    if "good" in t and "balance" in t:
+        return "Good balance · low OPEX"
+    return "Positive balance · reduces costs"
+
+
+def _cat_kpi(texto):
+    t = (texto or "").lower()
+    if "gas" in t or "concentration" in t:
+        return "Safety / gases"
+    if "rockfall" in t or "stability" in t:
+        return "Geotechnical stability"
+    if "advance" in t or "cost per meter" in t or "drilling" in t or "productivity" in t:
+        return "Productivity / advance rate ($/m)"
+    if "ore" in t or "mineral" in t or "dilution" in t or "tailings" in t:
+        return "Mineral processing / tailings"
+    return "Productivity / advance rate ($/m)"
+
+
+def _cat_riesgo(texto):
+    t = (texto or "").lower()
+    if "lack of maintenance" in t:
+        return "Maintenance / operation"
+    if "resistance" in t:
+        return "Organizational / resistance"
+    if "structural instability" in t or "liquefaction" in t:
+        return "Technical-geotechnical"
+    if "economic" in t or "unfeasible" in t or "energy" in t or "scale" in t:
+        return "Economic / scale"
+    if ("ore dilution" in t or "overbreak" in t or "depredation" in t
+            or "equipment" in t or "unadapted" in t or "technical" in t
+            or "geotechnical" in t or "stability" in t):
+        return "Technical-geotechnical"
+    if "capital" in t or "investment" in t or "financial loss" in t:
+        return "Economic / scale"
+    if "maintenance" in t or "operation" in t:
+        return "Maintenance / operation"
+    return "Technical-geotechnical"
 
 
 def datos_ronda2():
@@ -429,15 +482,20 @@ def datos_ronda2():
         reader = csv.DictReader(fh, delimiter=";")
         for i, r in enumerate(reader):
             tec = (r["Technologies"] or "").strip()
-            clave_norm = _norm(tec)
-            tag = next((k for k in R2_MAP if k in clave_norm), None)
-            viab, imp, kpi, ries = R2_MAP.get(tag, ("Viable", "Favorable", "—", "—"))
+            m = re.search(r"\((T\d+)\)", tec)
+            if not m:
+                m = re.search(r"^(T\d+)", tec)
+            tech_id = m.group(1) if m else "T%d" % (i + 1)
+            viab = _cat_viabilidad(r.get("Feasibility status", ""))
+            imp = _cat_financiero(r.get("Impact on financial balance (CAPEX/OPEX)", ""))
+            kpi = _cat_kpi(r.get("Key performance indicators (KPIs)", ""))
+            ries = _cat_riesgo(r.get("Identified risks and inefficiencies (including Q5 insights)", ""))
             filas.append({"clave": "r2:%d" % i, "orden": i, "tecnologia": tec,
                           "barreras": (r["Technical and economic barriers"] or "").strip(),
                           "viabilidad": viab, "impacto": imp, "kpi": kpi, "riesgo": ries,
-                          "color": dg.CLUSTER_COLORES[i % len(dg.CLUSTER_COLORES)]})
+                          "color": COLORES_TECH_R2.get(tech_id, dg.CLUSTER_COLORES[i % len(dg.CLUSTER_COLORES)])})
     meta = {"n_tec": len(filas), "n_ejes": 5,
-            "ejes": ["Tecnología", "Viabilidad", "Impacto", "KPI", "Riesgo"]}
+            "ejes": ["Technology", "Feasibility", "Financial impact", "Main KPI", "Dominant risk"]}
     return filas, meta
 
 

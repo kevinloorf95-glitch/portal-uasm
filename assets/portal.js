@@ -481,7 +481,7 @@
 
   R.chart_ronda2 = (el, rows, meta) => {
     const ejes = ["tecnologia", "viabilidad", "impacto", "kpi", "riesgo"];
-    const LAB = ["Tecnología", "Barreras", "Viabilidad", "Impacto", "KPI", "Riesgo"];
+    const LAB = ["Technology", "Feasibility", "Financial impact", "Main KPI", "Dominant risk"];
     const labels = [], x = [], color = [], ejeDe = [], clave = [];
     const idx = {};
     ejes.forEach((eje, i) => rows.forEach((r) => {
